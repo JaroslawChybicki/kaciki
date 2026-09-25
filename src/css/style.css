@@ -259,3 +259,25 @@ p { margin: 0 0 1em; }
 .kal-siatka-mala .kal-dzis .kal-nr { background: transparent; color: var(--grafit); box-shadow: inset 0 0 0 1.5px var(--grafit); }
 .kal-siatka-mala .kal-ma.kal-dzis .kal-nr { background: var(--pieczec); color: #fff; }
 .kal-siatka-mala .kal-ma::after { display: none; }
+
+/* Szczegóły wydarzenia (opis z Google Calendar) */
+.termin-rozwijany { display: block; }
+.termin-rozwijany summary { display: grid; grid-template-columns: 11rem 1fr auto; gap: .3rem 1.5rem; cursor: pointer; list-style: none; }
+.termin-rozwijany summary::-webkit-details-marker { display: none; }
+.termin-rozwijany summary::after { content: "+"; font-size: 1.3rem; line-height: 1; color: var(--szary); align-self: start; }
+.termin-rozwijany details[open] summary::after { content: "−"; }
+.termin-rozwijany summary:hover .termin-tytul { color: var(--bordo); }
+.termin-rozwijany summary:focus-visible { outline: 2px solid var(--bordo); outline-offset: 4px; }
+.termin-szczegoly { margin: 1rem 0 .3rem 12.5rem; font-size: .97rem; }
+.termin-szczegoly h4 { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--grafit); margin: 1.2rem 0 .5rem; }
+.plan-dnia { display: grid; grid-template-columns: auto 1fr; gap: .25rem 1.2rem; margin: 0; }
+.plan-dnia dt { color: var(--bordo); font-variant-numeric: tabular-nums; }
+.plan-dnia dd { margin: 0; }
+.termin-zapisy { margin-top: 1rem; }
+.kal-wyd { font: inherit; font-size: .75rem; text-align: left; border: 0; border-left: 2px solid var(--pieczec); cursor: pointer; width: 100%; }
+.kal-wyd:hover { background: #efd3cf; }
+@media (max-width: 560px) {
+  .termin-rozwijany summary { grid-template-columns: 1fr auto; }
+  .termin-rozwijany summary .termin-data { grid-column: 1 / -1; }
+  .termin-szczegoly { margin-left: 0; }
+}

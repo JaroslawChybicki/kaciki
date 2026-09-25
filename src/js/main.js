@@ -72,10 +72,40 @@
   };
 
   var esc = function (s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+  var akapity = function (s) {
+    return s.split(/\n{2,}/).map(function (a) { return '<p>' + esc(a).replace(/\n/g, '<br>') + '</p>'; }).join('');
+  };
+  var zapisy = function (z) {
+    if (/^https?:\/\//.test(z)) return '<a class="link" href="' + esc(z) + '" target="_blank" rel="noopener">Zapisy →</a>';
+    if (/^\S+@\S+\.\S+$/.test(z)) return 'Zapisy: <a class="link" href="mailto:' + esc(z) + '">' + esc(z) + '</a>';
+    return 'Zapisy: ' + esc(z);
+  };
+  // Wydarzenie z opisem/planem/zapisami rozwija się po kliknięciu (bez okien — działa też w ramce kannon.pl).
   var termin = function (t) {
-    return '<li class="termin"><span class="termin-data">' + esc(zakres(t)) + '</span>' +
+    var glowa = '<span class="termin-data">' + esc(zakres(t)) + '</span>' +
       '<span><span class="termin-tytul">' + esc(t.tytul) + '</span>' +
-      (t.miejsce ? '<span class="termin-miejsce">' + esc(t.miejsce) + '</span>' : '') + '</span></li>';
+      (t.prowadzi ? '<span class="termin-miejsce">Prowadzi: ' + esc(t.prowadzi) + '</span>' : '') +
+      (t.miejsce ? '<span class="termin-miejsce">' + esc(t.miejsce) + '</span>' : '') + '</span>';
+    var id = t.id ? ' id="w-' + esc(t.id) + '"' : '';
+    var plan = t.plan && t.plan.length;
+    if (!t.opis && !plan && !t.zapisy) return '<li class="termin"' + id + '>' + glowa + '</li>';
+    return '<li class="termin termin-rozwijany"' + id + '><details><summary>' + glowa + '</summary>' +
+      '<div class="termin-szczegoly">' +
+      (t.opis ? akapity(t.opis) : '') +
+      (plan ? '<h4>Plan dnia</h4><dl class="plan-dnia">' + t.plan.map(function (p) {
+        return '<dt>' + esc(p.godz) + '</dt><dd>' + esc(p.co) + '</dd>';
+      }).join('') + '</dl>' : '') +
+      (t.zapisy ? '<p class="termin-zapisy">' + zapisy(t.zapisy) + '</p>' : '') +
+      '</div></details></li>';
+  };
+  // Otwiera szczegóły wydarzenia na liście i przewija do niego (w ramce — przewija stronę kannon.pl).
+  var otworz = function (id) {
+    var li = document.getElementById('w-' + id);
+    if (!li) return;
+    var d = li.querySelector('details');
+    if (d) d.open = true;
+    if (osadzona) doRodzica({ type: 'kaciki-przewin', top: li.getBoundingClientRect().top + window.scrollY });
+    else li.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
   var pobierz = function (parametry) {
     return fetch('/api/terminy' + (parametry ? '?' + new URLSearchParams(parametry) : ''))
@@ -84,7 +114,7 @@
   var KANNON = '<a class="link" href="https://www.kannon.pl/" target="_top">kannon.pl</a>';
 
   window.KacikiTerminy = {
-    dni: dni, zakres: zakres, termin: termin, esc: esc, pobierz: pobierz,
+    dni: dni, zakres: zakres, termin: termin, esc: esc, pobierz: pobierz, otworz: otworz,
     naDate: naDate, naKlucz: naKlucz, dodajDni: dodajDni, dzis: function () { return fKlucz.format(new Date()); },
     KANNON: KANNON,
   };

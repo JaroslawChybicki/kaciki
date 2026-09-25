@@ -25,7 +25,22 @@ Sekcja „Najbliższa praktyka” pobiera wydarzenia z publicznego kalendarza Go
 3. W Netlify: *Project configuration → Environment variables* dodaj `GOOGLE_CALENDAR_ID` i `GOOGLE_API_KEY`, potem *Trigger deploy*.
 
 Klucz działa tylko po stronie serwera (funkcja `netlify/functions/terminy.mts`) — nie trafia do przeglądarki.
-Lista odświeża się co ok. 15 minut. W wydarzeniach wpisuj tytuł i miejsce — te pola są pokazywane.
+Lista odświeża się co ok. 15 minut. Pokazywane są: tytuł, *Lokalizacja* oraz pole *Opis* według wzoru
+(każda linia opcjonalna; wydarzenie z opisem rozwija się na stronie po kliknięciu):
+
+```
+Prowadzi: Roshi Mikołaj Uji Markiewicz
+Zapisy: osrodek@kannon.pl        ← albo link https://…
+
+Plan dnia:
+5:00 Zazen
+7:00 Śniadanie ōryōki
+9:00–12:00 Samu
+
+Dowolny opis wydarzenia — koszt, co zabrać, warunki uczestnictwa.
+```
+
+„Plan dnia” kończy się pustą linią; tekst poza polami jest opisem.
 
 ## Osadzenie na kannon.pl (dla administratora WordPressa)
 

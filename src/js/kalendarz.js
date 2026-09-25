@@ -60,7 +60,9 @@
       var klasy = 'kal-dzien' + (inny ? ' kal-inny' : '') + (k === dzis ? ' kal-dzis' : '') + (w.length && !inny ? ' kal-ma' : '');
       var opis = w.length ? ' title="' + K.esc(w.map(function (t) { return t.tytul; }).join(', ')) + '"' : '';
       html += '<div class="' + klasy + '" role="gridcell"' + opis + '><span class="kal-nr">' + +k.slice(8) + '</span>';
-      if (!male && !inny) html += w.map(function (t) { return '<span class="kal-wyd">' + K.esc(t.tytul) + '</span>'; }).join('');
+      if (!male && !inny) html += w.map(function (t) {
+        return '<button type="button" class="kal-wyd" data-wydarzenie="' + K.esc(t.id) + '">' + K.esc(t.tytul) + '</button>';
+      }).join('');
       html += '</div>';
     }
     return html + '</div>';
@@ -129,6 +131,8 @@
     stan.rok = +dzis.slice(0, 4); stan.miesiac = +dzis.slice(5, 7); rysuj();
   });
   el.addEventListener('click', function (e) {
+    var w = e.target.closest('[data-wydarzenie]');
+    if (w) { K.otworz(w.dataset.wydarzenie); return; }
     var b = e.target.closest('[data-do-miesiaca]');
     if (!b) return;
     stan.miesiac = +b.dataset.doMiesiaca; stan.widok = 'miesiac';

@@ -20,7 +20,9 @@ if(e.data&&e.data.type==='kaciki-wysokosc')f.style.height=e.data.height+'px';});
 // Testowe wydarzenia względem dzisiejszej daty (widoki Miesiąc/Rok mają co pokazać).
 const d = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
 const TERMINY = { skonfigurowany: true, terminy: [
-  { tytul: "Sesshin testowe", miejsce: "Kąciki", calodniowe: true, start: d(3), koniec: d(10) },
+  { id: "t1", tytul: "Sesshin testowe", miejsce: "Kąciki", calodniowe: true, start: d(3), koniec: d(10),
+    prowadzi: "Nauczyciel testowy", opis: "Opis testowy.\n\nDrugi akapit.", zapisy: "osrodek@kannon.pl",
+    plan: [{ godz: "5:00", co: "Zazen" }, { godz: "7:00", co: "Śniadanie" }] },
   { tytul: "Wprowadzenie do zazen", calodniowe: false, start: d(14) + "T18:00:00+02:00", koniec: d(14) + "T20:00:00+02:00" },
   { tytul: "Weekend samu", miejsce: "Kąciki", calodniowe: true, start: d(40), koniec: d(42) },
 ] };

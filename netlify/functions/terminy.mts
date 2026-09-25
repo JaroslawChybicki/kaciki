@@ -17,6 +17,50 @@ function zakresZapytania(url: URL) {
   return { min, maxCzas, max };
 }
 
+// Opis wydarzenia z Google Calendar → pola strony. Wzór (każda linia opcjonalna):
+//   Prowadzi: Roshi Mikołaj Uji Markiewicz
+//   Zapisy: https://… albo adres e-mail
+//   Plan dnia:
+//   5:00 Zazen
+//   7:00 Śniadanie ōryōki
+//   (pusta linia kończy plan)
+//   Pozostały tekst to opis.
+function tekst(html: string) {
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/(p|div|li|h\d)>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+}
+
+const GODZINA = /^(\d{1,2}[:.]\d{2}(?:\s*[–-]\s*\d{1,2}[:.]\d{2})?)\s*[–—-]?\s*(.*)$/;
+
+function rozbierzOpis(surowy: string) {
+  const wynik = { prowadzi: "", zapisy: "", plan: [] as { godz: string; co: string }[], opis: "" };
+  const reszta: string[] = [];
+  let wPlanie = false;
+  for (const linia of tekst(surowy ?? "").split("\n").map((l) => l.trim())) {
+    const pole = /^(prowadz(?:i|ący|ąca|ą)|zapisy|plan dnia)\s*:\s*(.*)$/i.exec(linia);
+    if (pole) {
+      const nazwa = pole[1].toLowerCase();
+      wPlanie = nazwa === "plan dnia";
+      if (nazwa.startsWith("prowadz")) wynik.prowadzi = pole[2];
+      else if (nazwa === "zapisy") wynik.zapisy = pole[2];
+      continue;
+    }
+    if (wPlanie) {
+      if (!linia) { wPlanie = false; continue; }
+      const g = GODZINA.exec(linia);
+      wynik.plan.push(g ? { godz: g[1].replace(".", ":"), co: g[2] } : { godz: "", co: linia });
+      continue;
+    }
+    reszta.push(linia);
+  }
+  wynik.opis = reszta.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  return wynik;
+}
+
 export default async (req: Request) => {
   const calendarId = Netlify.env.get("GOOGLE_CALENDAR_ID");
   const apiKey = Netlify.env.get("GOOGLE_API_KEY");
@@ -46,7 +90,9 @@ export default async (req: Request) => {
 
   const dane = await res.json();
   const terminy = (dane.items ?? []).map((e: any) => ({
+    id: e.id ?? "",
     tytul: e.summary ?? "",
+    ...rozbierzOpis(e.description ?? ""),
     miejsce: e.location ?? "",
     calodniowe: Boolean(e.start?.date),
     start: e.start?.date ?? e.start?.dateTime,
