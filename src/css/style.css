@@ -48,7 +48,35 @@ p { margin: 0 0 1em; }
 .menu a { flex: none; padding: 1rem 0; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--grafit); text-decoration: none; border-bottom: 2px solid transparent; }
 .menu a:hover { color: var(--bordo); }
 .menu a[aria-current="page"] { border-bottom-color: var(--pieczec); }
-@media (max-width: 600px) { .menu-in { gap: 1.3rem; } }
+.menu-pasek { display: none; }
+
+/* Telefon i wąskie ramki: menu schowane pod przyciskiem (hamburger). */
+@media (max-width: 900px) {
+  .menu-pasek { display: block; }
+  .menu-przycisk {
+    display: flex; align-items: center; gap: .7rem; width: 100%; padding: .95rem 0;
+    background: none; border: 0; cursor: pointer;
+    font: 500 .85rem var(--font); letter-spacing: .1em; text-transform: uppercase; color: var(--grafit);
+  }
+  .menu-ikona { position: relative; width: 20px; height: 14px; }
+  .menu-ikona::before, .menu-ikona::after, .menu-ikona span {
+    content: ""; position: absolute; left: 0; width: 100%; height: 1.5px; background: currentColor;
+    transition: transform .25s, opacity .2s;
+  }
+  .menu-ikona::before { top: 0; }
+  .menu-ikona span { top: 6px; }
+  .menu-ikona::after { top: 12px; }
+  .menu.otwarte .menu-ikona::before { transform: translateY(6px) rotate(45deg); }
+  .menu.otwarte .menu-ikona span { opacity: 0; }
+  .menu.otwarte .menu-ikona::after { transform: translateY(-6px) rotate(-45deg); }
+
+  .menu-in { display: none; flex-direction: column; gap: 0; overflow: visible; padding-bottom: .6rem; }
+  .menu.otwarte .menu-in { display: flex; }
+  .menu-in a { padding: .85rem 0; border-bottom: 1px solid var(--linia); border-left: 2px solid transparent; }
+  .menu-in a:last-child { border-bottom: 0; }
+  .menu-in a[aria-current="page"] { border-bottom-color: var(--linia); border-left-color: var(--pieczec); padding-left: .8rem; }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) { .menu-ikona * , .menu-ikona::before, .menu-ikona::after { transition: none; } }
 
 .przycisk { display: inline-block; font: 500 .82rem var(--font); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .95em 1.6em; background: var(--grafit); color: #fff; border: 1px solid var(--grafit); cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
 .przycisk:hover { background: var(--bordo); border-color: var(--bordo); color: #fff; }

@@ -27,7 +27,12 @@
 </header>
 
 <nav class="menu" aria-label="Menu">
-  <div class="wrap menu-in">
+  <div class="wrap menu-pasek">
+    <button class="menu-przycisk" type="button" aria-expanded="false" aria-controls="menu-lista">
+      <span class="menu-ikona" aria-hidden="true"><span></span></span> Menu
+    </button>
+  </div>
+  <div class="wrap menu-in" id="menu-lista">
     <a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Centrum</a>
     <a href="/aktualnosci/"{% if "/aktualnosci/" in page.url %} aria-current="page"{% endif %}>Aktualności</a>
     <a href="/zapiski/"{% if "/zapiski/" in page.url %} aria-current="page"{% endif %}>Zapiski z Kącików</a>

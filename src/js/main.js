@@ -30,6 +30,19 @@
     if (location.hash) window.addEventListener('load', function () { przewinDo(location.hash.slice(1)); });
   }
 
+  /* ---------- Menu na telefonie (hamburger) ---------- */
+  var menu = document.querySelector('.menu');
+  var przycisk = document.querySelector('.menu-przycisk');
+  if (menu && przycisk) {
+    var ustaw = function (otwarte) {
+      menu.classList.toggle('otwarte', otwarte);
+      przycisk.setAttribute('aria-expanded', otwarte);
+    };
+    przycisk.addEventListener('click', function () { ustaw(!menu.classList.contains('otwarte')); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('.menu-in a')) ustaw(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ustaw(false); });
+  }
+
   /* ---------- Terminy z Kalendarza Google ---------- */
   var lista = document.querySelector('[data-terminy]');
   if (lista) {
