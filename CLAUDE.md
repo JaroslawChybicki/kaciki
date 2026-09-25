@@ -36,3 +36,5 @@ Dopasowany do kannon.pl: font Lora, biel, grafit #333, bordo #8e1f2b (linki), cz
 - [ ] Usunąć zbędny pusty projekt Netlify `kaciki-zen` (robi to Jarek w UI).
 - [ ] E-mail ośrodka: na stronie osrodek@kannon.pl (26.09) — potwierdzić z Wojtkiem, że alias działa i ma 2 osoby z dostępem.
 - [ ] Przekazać adminowi kannon.pl kod osadzenia z README.
+- [ ] Kalendarz: sprawdzić na prawdziwym wydarzeniu, czy Google zwraca załączniki (pole attachments) dla publicznego kalendarza; opis wydarzeń (Prowadzi/Plan dnia/Zapisy) działa — potwierdzone 26.09.
+- [ ] Czeka na decyzje Jarka: zestawienie z Projektu „Zarząd Kącików” (K1 zrobione — e-mail; K2–K9 otwarte; punkt 1: /o-danych, zdanie o braku konsultacji, fonty lokalnie). Podsumowanie Projektu NIE jest jeszcze w repo — poprosić o ponowne wklejenie w nowej sesji.
