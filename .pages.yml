@@ -2,7 +2,7 @@
 media:
   input: src/img/uploads
   output: /img/uploads
-  extensions: [jpg, jpeg, png, webp, gif, svg]
+  extensions: [jpg, jpeg, png, webp, gif, svg, pdf]
 
 content:
   - name: zapiski
@@ -54,6 +54,46 @@ content:
         default: false
       - name: body
         label: Treść
+        type: rich-text
+
+  - name: dokumenty
+    label: Dokumenty
+    type: collection
+    path: src/dokumenty/pliki
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, kategoria, szkic]
+      primary: title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+        required: true
+      - name: date
+        label: Data dokumentu
+        type: date
+        required: true
+      - name: kategoria
+        label: Rodzaj
+        type: select
+        required: true
+        options:
+          values: [Regulaminy, Raporty z posiedzeń zarządu, Sprawozdania, Inne]
+      - name: opis
+        label: Krótki opis (widoczny na liście)
+        type: text
+      - name: plik
+        label: Plik PDF (opcjonalnie)
+        type: file
+      - name: szkic
+        label: Szkic (nie publikuj jeszcze)
+        type: boolean
+        default: false
+      - name: body
+        label: Treść (opcjonalnie — tekst dokumentu na stronie)
         type: rich-text
 
   - name: strona

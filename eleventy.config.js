@@ -12,7 +12,14 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date)
   );
 
+  eleventyConfig.addCollection("dokumenty", (api) =>
+    api.getFilteredByGlob("src/dokumenty/pliki/*.md")
+      .filter((p) => !p.data.szkic)
+      .sort((a, b) => b.date - a.date)
+  );
+
   eleventyConfig.addFilter("dataPL", (d) => dataPL.format(new Date(d)));
+  eleventyConfig.addFilter("wRodzaju", (arr, r) => (arr || []).filter((d) => d.data.kategoria === r));
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("isoData", (d) => new Date(d).toISOString().slice(0, 10));
 

@@ -1,0 +1,17 @@
+---
+layout: base.njk
+---
+<article class="wpis">
+  <div class="wrap wrap-waski">
+    <p class="wpis-meta"><a href="/dokumenty/">Dokumenty</a>{% if kategoria %} · {{ kategoria }}{% endif %} · <time datetime="{{ page.date | isoData }}">{{ page.date | dataPL }}</time></p>
+    <h1>{{ title }}</h1>
+    {% if opis %}<p class="wpis-lead">{{ opis }}</p>{% endif %}
+    {% if plik %}<p><a class="przycisk" href="{{ plik }}" target="_blank" rel="noopener" download>Pobierz PDF</a></p>{% endif %}
+  </div>
+  <div class="wrap wrap-waski tresc">
+    {{ content | zdjeciaWTresci | safe }}
+  </div>
+  <div class="wrap wrap-waski wpis-powrot">
+    <a class="link" href="/dokumenty/">← Wszystkie dokumenty</a>
+  </div>
+</article>

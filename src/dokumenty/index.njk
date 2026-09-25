@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Dokumenty
+opis: Regulaminy, raporty z posiedzeń zarządu i sprawozdania Centrum Zen Kąciki.
+---
+{% set rodzaje = ["Regulaminy", "Raporty z posiedzeń zarządu", "Sprawozdania", "Inne"] %}
+<section class="sekcja sekcja-pierwsza">
+  <div class="wrap">
+    <p class="etykieta">Dokumenty</p>
+    <h1 class="tytul-strony">Dokumenty</h1>
+    <p class="lead">Regulaminy, raporty z posiedzeń zarządu i sprawozdania Centrum.</p>
+
+    {% if collections.dokumenty.length %}
+      {% for rodzaj in rodzaje %}
+        {% set lista = collections.dokumenty | wRodzaju(rodzaj) %}
+        {% if lista.length %}
+        <div class="dokumenty-grupa">
+          <h2>{{ rodzaj }}</h2>
+          <ul class="dokumenty">
+            {% for d in lista %}
+            <li>
+              <a class="dokument-tytul" href="{{ d.url }}">{{ d.data.title }}</a>
+              <span class="dokument-meta">{{ d.date | dataPL }}{% if d.data.plik %} · PDF{% endif %}</span>
+              {% if d.data.opis %}<p>{{ d.data.opis }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p class="szary dokumenty-pusto">Dokumenty pojawią się wkrótce.</p>
+    {% endif %}
+  </div>
+</section>
