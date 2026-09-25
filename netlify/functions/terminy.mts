@@ -18,7 +18,7 @@ function zakresZapytania(url: URL) {
 }
 
 // Opis wydarzenia z Google Calendar → pola strony. Wzór (każda linia opcjonalna):
-//   Prowadzi: Roshi Mikołaj Uji Markiewicz
+//   Prowadzi: Roshi Mikołaj Uji Markiewicz   (także „Prowadzący:”, „Prowadzenie:”)
 //   Zapisy: https://… albo adres e-mail
 //   Plan dnia:
 //   5:00 Zazen
@@ -41,7 +41,7 @@ function rozbierzOpis(surowy: string) {
   const reszta: string[] = [];
   let wPlanie = false;
   for (const linia of tekst(surowy ?? "").split("\n").map((l) => l.trim())) {
-    const pole = /^(prowadz(?:i|ący|ąca|ą)|zapisy|plan dnia)\s*:\s*(.*)$/i.exec(linia);
+    const pole = /^(prowadz(?:i|ący|ąca|ą|enie)|zapisy|plan dnia)\s*:\s*(.*)$/i.exec(linia);
     if (pole) {
       const nazwa = pole[1].toLowerCase();
       wPlanie = nazwa === "plan dnia";
@@ -104,7 +104,7 @@ export default async (req: Request) => {
     {
       headers: {
         "Cache-Control": "public, max-age=0, must-revalidate",
-        "Netlify-CDN-Cache-Control": "public, durable, s-maxage=900, stale-while-revalidate=3600",
+        "Netlify-CDN-Cache-Control": "public, durable, s-maxage=300, stale-while-revalidate=600",
       },
     }
   );
