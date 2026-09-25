@@ -28,7 +28,7 @@ Dopasowany do kannon.pl: font Lora, biel, grafit #333, bordo #8e1f2b (linki), cz
 - Fragmenty nauk nauczycieli w Zapiskach — tylko za ich zgodą.
 
 ## Otwarte sprawy (stan na 25.09.2026)
-- [x] Kalendarz Google podłączony (26.09): GOOGLE_CALENDAR_ID=zenkaciki@gmail.com, klucz w zmiennych Netlify (scope: functions). Zalecana rotacja klucza — był wklejony w czacie.
+- [x] Kalendarz Google podłączony (26.09): GOOGLE_CALENDAR_ID=zenkaciki@gmail.com, klucz GOOGLE_API_KEY w zmiennych Netlify (zwykła zmienna; zapis jako „secret” przez MCP nie działał — można oznaczyć jako secret ręcznie w UI). Zalecana rotacja klucza — był wklejony w czacie.
 - [ ] Jarek przemyśli wygląd i zawartość strony.
 - [ ] Logo — Jarek może wgrać własne (pole w Ustawieniach strony); ew. zamiana dużego ensō w hero.
 - [ ] Dokumenty: pusta zakładka gotowa (Regulaminy / Raporty z posiedzeń zarządu / Sprawozdania / Inne). Oferta: szablon raportu z posiedzenia zarządu; projekt regulaminu pobytu.
