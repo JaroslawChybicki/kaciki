@@ -204,3 +204,5 @@ p { margin: 0 0 1em; }
 /* Thank-you page */
 .thanks { min-height: 100vh; display: grid; place-items: center; text-align: center; padding: 2rem 16px; }
 .thanks img { width: 120px; margin: 0 auto 2rem; }
+
+.address { font-style: normal; font-family: var(--serif); font-size: 1.45rem; line-height: 1.4; color: var(--deep); margin-bottom: 1.5rem; padding-left: 1rem; border-left: 3px solid var(--red); }
