@@ -15,7 +15,7 @@ layout: base.njk
   {% endif %}
 
   <div class="wrap wrap-waski tresc">
-    {{ content | safe }}
+    {{ content | zdjeciaWTresci | safe }}
   </div>
 
   {% if galeria and galeria.length %}
