@@ -176,3 +176,5 @@ p { margin: 0 0 1em; }
 .dokument-meta { display: block; font-size: .85rem; color: var(--szary); }
 .dokumenty li p { margin: .4rem 0 0; color: var(--szary); font-size: .95rem; }
 .dokumenty-pusto { margin-top: 2rem; }
+.karty-dwie { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) { .karty-dwie { grid-template-columns: 1fr; } }

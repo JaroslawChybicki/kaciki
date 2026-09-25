@@ -1,22 +1,17 @@
-const WPISY = "src/zapiski/wpisy/*.md";
 
 const dataPL = new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Warsaw" });
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/css": "css", "src/js": "js", "src/img": "img" });
 
-  // Wpisy „Zapisków z Kącików” — bez szkiców, od najnowszego.
-  eleventyConfig.addCollection("zapiski", (api) =>
-    api.getFilteredByGlob(WPISY)
-      .filter((p) => !p.data.szkic)
-      .sort((a, b) => b.date - a.date)
-  );
-
-  eleventyConfig.addCollection("dokumenty", (api) =>
-    api.getFilteredByGlob("src/dokumenty/pliki/*.md")
-      .filter((p) => !p.data.szkic)
-      .sort((a, b) => b.date - a.date)
-  );
+  // Treści z panelu — bez szkiców, od najnowszego.
+  const kolekcja = (nazwa, glob) =>
+    eleventyConfig.addCollection(nazwa, (api) =>
+      api.getFilteredByGlob(glob).filter((p) => !p.data.szkic).sort((a, b) => b.date - a.date)
+    );
+  kolekcja("aktualnosci", "src/aktualnosci/wpisy/*.md");
+  kolekcja("zapiski", "src/zapiski/wpisy/*.md");
+  kolekcja("dokumenty", "src/dokumenty/pliki/*.md");
 
   eleventyConfig.addFilter("dataPL", (d) => dataPL.format(new Date(d)));
   eleventyConfig.addFilter("wRodzaju", (arr, r) => (arr || []).filter((d) => d.data.kategoria === r));

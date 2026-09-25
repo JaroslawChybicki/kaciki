@@ -5,6 +5,57 @@ media:
   extensions: [jpg, jpeg, png, webp, gif, svg, pdf]
 
 content:
+  - name: aktualnosci
+    label: Aktualności
+    type: collection
+    path: src/aktualnosci/wpisy
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, kategoria, szkic]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+        required: true
+      - name: date
+        label: Data
+        type: date
+        required: true
+      - name: kategoria
+        label: Kategoria
+        type: select
+        options:
+          values: [Komunikaty, Z budowy, Z życia Centrum]
+      - name: opis
+        label: Zajawka (1–2 zdania na liście wpisów)
+        type: text
+      - name: okladka
+        label: Zdjęcie główne
+        type: image
+      - name: galeria
+        label: Galeria zdjęć
+        type: object
+        list: true
+        fields:
+          - name: obraz
+            label: Zdjęcie
+            type: image
+          - name: podpis
+            label: Podpis
+            type: string
+      - name: szkic
+        label: Szkic (nie publikuj jeszcze)
+        type: boolean
+        default: false
+      - name: body
+        label: Treść
+        type: rich-text
+
   - name: zapiski
     label: Zapiski z Kącików
     type: collection
@@ -30,7 +81,7 @@ content:
         label: Kategoria
         type: select
         options:
-          values: [Rozbudowa, Praktyka, Z życia Centrum]
+          values: [Refleksje, Praktyka, Zen w codzienności]
       - name: opis
         label: Zajawka (1–2 zdania na liście wpisów)
         type: text

@@ -1,26 +1,26 @@
 ---
 layout: base.njk
-title: Zapiski z Kącików
-opis: Teksty o praktyce zen — refleksje z Centrum Zen Kąciki.
+title: Aktualności
+opis: Komunikaty, wieści z budowy i życie Centrum Zen Kąciki.
 pagination:
-  data: collections.zapiski
+  data: collections.aktualnosci
   size: 9
   alias: wpisy
   generatePageOnEmptyData: true
-permalink: "/zapiski/{% if pagination.pageNumber > 0 %}strona-{{ pagination.pageNumber + 1 }}/{% endif %}"
+permalink: "/aktualnosci/{% if pagination.pageNumber > 0 %}strona-{{ pagination.pageNumber + 1 }}/{% endif %}"
 ---
 <section class="sekcja sekcja-pierwsza">
   <div class="wrap">
-    <p class="etykieta">Teksty o praktyce</p>
-    <h1 class="tytul-strony">Zapiski z Kącików</h1>
-    <p class="lead">Refleksje o praktyce zen — w zendo, przy pracy i w codzienności.</p>
+    <p class="etykieta">Centrum Zen Kąciki</p>
+    <h1 class="tytul-strony">Aktualności</h1>
+    <p class="lead">Komunikaty, wieści z budowy i życie Centrum.</p>
 
     {% if wpisy.length %}
     <div class="karty">
       {% for wpis in wpisy %}{% include "karta-wpisu.njk" %}{% endfor %}
     </div>
     {% else %}
-    <p class="szary">Pierwsze zapiski wkrótce.</p>
+    <p class="szary">Aktualności pojawią się wkrótce.</p>
     {% endif %}
 
     {% if pagination.pages.length > 1 %}

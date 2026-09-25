@@ -9,7 +9,7 @@ layout: base.njk
       <p class="lead">{{ strona.wstep }}</p>
       <p class="akcje">
         <a class="przycisk" href="#terminy">Najbliższe terminy</a>
-        <a class="przycisk przycisk-jasny" href="/zapiski/">Zapiski z Kącików</a>
+        <a class="przycisk przycisk-jasny" href="/aktualnosci/">Aktualności</a>
       </p>
     </div>
     <img class="hero-enso" src="/img/enso.svg" alt="">
@@ -32,18 +32,18 @@ layout: base.njk
   </div>
 </section>
 
-{% if collections.zapiski.length %}
+{% if collections.aktualnosci.length %}
 <section class="sekcja sekcja-tlo">
   <div class="wrap">
     <div class="sekcja-glowka">
       <div>
-        <p class="etykieta">Zapiski z Kącików</p>
-        <h2>Z życia Centrum</h2>
+        <p class="etykieta">Aktualności</p>
+        <h2>Co słychać w Kącikach</h2>
       </div>
-      <a class="link" href="/zapiski/">Wszystkie zapiski →</a>
+      <a class="link" href="/aktualnosci/">Wszystkie aktualności →</a>
     </div>
     <div class="karty">
-      {% for wpis in collections.zapiski | head(3) %}{% include "karta-wpisu.njk" %}{% endfor %}
+      {% for wpis in collections.aktualnosci | head(3) %}{% include "karta-wpisu.njk" %}{% endfor %}
     </div>
   </div>
 </section>
@@ -71,6 +71,23 @@ layout: base.njk
     <div class="linia-akcent"><span class="linia-imie">Centrum Zen Kąciki</span><span class="linia-opis">gmina Osieck</span></div>
   </div>
 </section>
+
+{% if collections.zapiski.length %}
+<section class="sekcja">
+  <div class="wrap">
+    <div class="sekcja-glowka">
+      <div>
+        <p class="etykieta">Zapiski z Kącików</p>
+        <h2>O praktyce</h2>
+      </div>
+      <a class="link" href="/zapiski/">Wszystkie zapiski →</a>
+    </div>
+    <div class="karty karty-dwie">
+      {% for wpis in collections.zapiski | head(2) %}{% include "karta-wpisu.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <section id="historia" class="sekcja sekcja-tlo">
   <div class="wrap dwie-kol">

@@ -9,3 +9,9 @@
     Content-Security-Policy = "frame-ancestors 'self' https://kannon.pl https://www.kannon.pl"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Wpis powitalny przeniesiony z Zapisków do Aktualności.
+[[redirects]]
+  from = "/zapiski/zapiski-z-kacikow/"
+  to = "/aktualnosci/witamy/"
+  status = 301

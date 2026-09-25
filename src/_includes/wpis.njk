@@ -3,7 +3,7 @@ layout: base.njk
 ---
 <article class="wpis">
   <div class="wrap wrap-waski">
-    <p class="wpis-meta"><a href="/zapiski/">Zapiski z Kącików</a>{% if kategoria %} · {{ kategoria }}{% endif %} · <time datetime="{{ page.date | isoData }}">{{ page.date | dataPL }}</time></p>
+    <p class="wpis-meta"><a href="{{ sekcja.url }}">{{ sekcja.nazwa }}</a>{% if kategoria %} · {{ kategoria }}{% endif %} · <time datetime="{{ page.date | isoData }}">{{ page.date | dataPL }}</time></p>
     <h1>{{ title }}</h1>
     {% if opis %}<p class="wpis-lead">{{ opis }}</p>{% endif %}
   </div>
@@ -34,6 +34,6 @@ layout: base.njk
   {% endif %}
 
   <div class="wrap wrap-waski wpis-powrot">
-    <a class="link" href="/zapiski/">← Wszystkie zapiski</a>
+    <a class="link" href="{{ sekcja.url }}">← {{ sekcja.nazwa }}: wszystkie wpisy</a>
   </div>
 </article>
