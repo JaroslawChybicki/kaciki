@@ -36,7 +36,7 @@
     <a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Centrum</a>
     <a href="/aktualnosci/"{% if "/aktualnosci/" in page.url %} aria-current="page"{% endif %}>Aktualności</a>
     <a href="/zapiski/"{% if "/zapiski/" in page.url %} aria-current="page"{% endif %}>Zapiski z Kącików</a>
-    <a href="/#terminy">Terminy</a>
+    <a href="/terminy/"{% if page.url == "/terminy/" %} aria-current="page"{% endif %}>Terminy</a>
     <a href="/#historia">Historia</a>
     <a href="/dokumenty/"{% if "/dokumenty/" in page.url %} aria-current="page"{% endif %}>Dokumenty</a>
     <a href="/#kontakt">Kontakt</a>
@@ -61,5 +61,6 @@
 </dialog>
 
 <script src="/js/main.js"></script>
+{% if skrypt %}<script src="{{ skrypt }}"></script>{% endif %}
 </body>
 </html>

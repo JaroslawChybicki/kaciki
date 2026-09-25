@@ -206,3 +206,56 @@ p { margin: 0 0 1em; }
 .dokumenty-pusto { margin-top: 2rem; }
 .karty-dwie { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 560px) { .karty-dwie { grid-template-columns: 1fr; } }
+
+/* Kalendarz (/terminy/) */
+.kal-pasek { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+.kal-zakladki { display: inline-flex; border: 1px solid var(--grafit); }
+.kal-zakladki button, .kal-nawigacja button {
+  font: 500 .8rem var(--font); letter-spacing: .1em; text-transform: uppercase;
+  background: transparent; color: var(--grafit); border: 0; padding: .7em 1.2em; cursor: pointer;
+}
+.kal-zakladki button + button { border-left: 1px solid var(--grafit); }
+.kal-zakladki button[aria-selected="true"] { background: var(--grafit); color: #fff; }
+.kal-nawigacja { display: inline-flex; align-items: center; gap: .3rem; }
+.kal-nawigacja[hidden] { display: none; }
+.kal-nawigacja button { border: 1px solid var(--linia); font-size: 1rem; padding: .45em .9em; }
+.kal-nawigacja .kal-dzis-przycisk { font-size: .75rem; }
+.kal-nawigacja button:hover, .kal-zakladki button:hover { color: var(--bordo); }
+.kal-zakladki button[aria-selected="true"]:hover { color: #fff; }
+.kal-zakladki :focus-visible, .kal-nawigacja :focus-visible, .kal-rok-tytul:focus-visible { outline: 2px solid var(--bordo); outline-offset: 2px; }
+.kal-etykieta { font-size: 1.6rem; margin: 1.6rem 0 1.2rem; }
+.kal[aria-busy="true"] { opacity: .5; transition: opacity .2s; }
+.kal-miesiac-tytul { font-size: 1.15rem; margin: 2rem 0 .6rem; color: var(--bordo); }
+.kal-miesiac-tytul:first-child { margin-top: 0; }
+.kal-pusto { padding: 1rem 0; }
+
+.kal-siatka { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid var(--linia); border-left: 1px solid var(--linia); }
+.kal-dzien-tyg { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--szary); padding: .5rem; border-right: 1px solid var(--linia); border-bottom: 1px solid var(--linia); background: var(--tlo-2); }
+.kal-dzien { min-height: 6.5rem; padding: .35rem .4rem; border-right: 1px solid var(--linia); border-bottom: 1px solid var(--linia); display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.kal-nr { font-size: .85rem; color: var(--grafit); }
+.kal-inny { background: var(--tlo-2); }
+.kal-inny .kal-nr { color: #b5b2ab; }
+.kal-dzis .kal-nr { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--grafit); color: #fff; }
+.kal-wyd { font-size: .75rem; line-height: 1.3; padding: .15rem .35rem; background: #f6e7e5; color: var(--bordo); border-left: 2px solid var(--pieczec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kal-pod-siatka { margin-top: 1.5rem; }
+@media (max-width: 700px) {
+  .kal-dzien { min-height: 3rem; align-items: center; }
+  .kal-wyd { display: none; }
+  .kal-ma:not(.kal-inny)::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--pieczec); }
+  .kal-dzien-tyg { padding: .4rem .2rem; text-align: center; letter-spacing: 0; }
+}
+
+.kal-rok { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem 1.2rem; margin-bottom: 2.5rem; }
+@media (max-width: 900px) { .kal-rok { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .kal-rok { grid-template-columns: repeat(2, 1fr); } }
+.kal-rok-tytul { font: 400 1rem var(--font); color: var(--grafit); background: none; border: 0; padding: 0 0 .4rem; cursor: pointer; }
+.kal-rok-tytul:hover { color: var(--bordo); text-decoration: underline; }
+.kal-siatka-mala { border: 0; }
+.kal-siatka-mala .kal-dzien-tyg { background: none; border: 0; padding: .1rem 0; text-align: center; font-size: .62rem; letter-spacing: 0; }
+.kal-siatka-mala .kal-dzien { min-height: 0; padding: .1rem 0; border: 0; align-items: center; }
+.kal-siatka-mala .kal-nr { font-size: .72rem; width: 1.45rem; height: 1.45rem; display: inline-grid; place-items: center; border-radius: 50%; }
+.kal-siatka-mala .kal-inny { background: none; visibility: hidden; }
+.kal-siatka-mala .kal-ma .kal-nr { background: var(--pieczec); color: #fff; }
+.kal-siatka-mala .kal-dzis .kal-nr { background: transparent; color: var(--grafit); box-shadow: inset 0 0 0 1.5px var(--grafit); }
+.kal-siatka-mala .kal-ma.kal-dzis .kal-nr { background: var(--pieczec); color: #fff; }
+.kal-siatka-mala .kal-ma::after { display: none; }

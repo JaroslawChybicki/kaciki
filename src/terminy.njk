@@ -1,0 +1,34 @@
+---
+layout: base.njk
+title: Terminy
+opis: Kalendarz Centrum Zen Kąciki — sesshin, weekendy praktyki i pracy.
+permalink: /terminy/
+skrypt: /js/kalendarz.js
+---
+<section class="sekcja sekcja-pierwsza">
+  <div class="wrap">
+    <p class="etykieta">Kalendarz</p>
+    <h1 class="tytul-strony">Terminy</h1>
+    <p class="lead">Sesshin, weekendy praktyki i pracy. Kalendarz aktualizuje się automatycznie.</p>
+
+    <div class="kal-pasek">
+      <div class="kal-zakladki" role="tablist" aria-label="Widok kalendarza">
+        <button type="button" role="tab" data-widok="lista" aria-selected="true">Lista</button>
+        <button type="button" role="tab" data-widok="miesiac" aria-selected="false">Miesiąc</button>
+        <button type="button" role="tab" data-widok="rok" aria-selected="false">Rok</button>
+      </div>
+      <div class="kal-nawigacja" data-kal-nawigacja hidden>
+        <button type="button" data-przesun="-1" aria-label="Poprzedni">‹</button>
+        <button type="button" class="kal-dzis-przycisk" data-kal-dzis>Dziś</button>
+        <button type="button" data-przesun="1" aria-label="Następny">›</button>
+      </div>
+    </div>
+    <h2 class="kal-etykieta" data-kal-etykieta aria-live="polite">Najbliższe 12 miesięcy</h2>
+
+    <div class="kal" data-kalendarz aria-live="polite">
+      <p class="szary">Wczytywanie kalendarza…</p>
+    </div>
+
+    <p class="terminy-stopka"><a class="link" href="/#kontakt">Zapytaj o udział →</a></p>
+  </div>
+</section>

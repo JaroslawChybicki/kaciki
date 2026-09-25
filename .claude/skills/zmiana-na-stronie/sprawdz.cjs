@@ -17,9 +17,12 @@ const RAMKA = `<!doctype html><meta charset="utf-8"><body style="margin:0">
 <script>addEventListener('message',function(e){var f=document.getElementById('kaciki-zen');
 if(e.data&&e.data.type==='kaciki-wysokosc')f.style.height=e.data.height+'px';});</script>`;
 
+// Testowe wydarzenia względem dzisiejszej daty (widoki Miesiąc/Rok mają co pokazać).
+const d = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
 const TERMINY = { skonfigurowany: true, terminy: [
-  { tytul: "Sesshin testowe", miejsce: "Kąciki", calodniowe: true, start: "2030-05-10", koniec: "2030-05-17" },
-  { tytul: "Wprowadzenie do zazen", calodniowe: false, start: "2030-06-01T18:00:00+02:00", koniec: "2030-06-01T20:00:00+02:00" },
+  { tytul: "Sesshin testowe", miejsce: "Kąciki", calodniowe: true, start: d(3), koniec: d(10) },
+  { tytul: "Wprowadzenie do zazen", calodniowe: false, start: d(14) + "T18:00:00+02:00", koniec: d(14) + "T20:00:00+02:00" },
+  { tytul: "Weekend samu", miejsce: "Kąciki", calodniowe: true, start: d(40), koniec: d(42) },
 ] };
 
 function serwer() {
@@ -54,7 +57,7 @@ function strony(dir = SITE, baza = "/") {
 
   for (const [nazwa, szer] of [["desktop", 1280], ["telefon", 390]]) {
     const ctx = await przegladarka.newContext({ viewport: { width: szer, height: 800 } });
-    await ctx.route("**/api/terminy", (r) => r.fulfill({ json: TERMINY }));
+    await ctx.route("**/api/terminy*", (r) => r.fulfill({ json: TERMINY }));
     await ctx.route("**/.netlify/images**", (r) => r.fulfill({ status: 404 }));
     for (const url of strony()) {
       const p = await ctx.newPage();
@@ -71,7 +74,7 @@ function strony(dir = SITE, baza = "/") {
   }
 
   const ctx = await przegladarka.newContext({ viewport: { width: 1100, height: 800 } });
-  await ctx.route("**/api/terminy", (r) => r.fulfill({ json: TERMINY }));
+  await ctx.route("**/api/terminy*", (r) => r.fulfill({ json: TERMINY }));
   const p = await ctx.newPage();
   await p.goto(baza + "/__ramka.html", { waitUntil: "networkidle" });
   await p.waitForTimeout(800);

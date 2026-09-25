@@ -43,44 +43,66 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ustaw(false); });
   }
 
-  /* ---------- Terminy z Kalendarza Google ---------- */
+  /* ---------- Terminy z Kalendarza Google (wspólne z /terminy/) ---------- */
+  var STREFA = 'Europe/Warsaw';
+  var fMiesiac = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', timeZone: STREFA });
+  var fPelna = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: STREFA });
+  var fGodzina = new Intl.DateTimeFormat('pl-PL', { hour: '2-digit', minute: '2-digit', timeZone: STREFA });
+  var fKlucz = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: STREFA });
+
+  // Dni jako klucze „RRRR-MM-DD” w strefie Warszawy; arytmetyka na UTC, żeby nie zależeć od strefy przeglądarki.
+  var naDate = function (k) { var p = k.split('-'); return new Date(Date.UTC(+p[0], p[1] - 1, +p[2], 12)); };
+  var naKlucz = function (d) { return d.toISOString().slice(0, 10); };
+  var dodajDni = function (k, n) { var d = naDate(k); d.setUTCDate(d.getUTCDate() + n); return naKlucz(d); };
+  var kluczCzasu = function (iso) { return fKlucz.format(new Date(iso)); };
+
+  // Pierwszy i ostatni dzień wydarzenia (koniec całodniowych w Google jest wyłączny).
+  var dni = function (t) {
+    if (t.calodniowe) return { od: t.start, do: dodajDni(t.koniec, -1) };
+    var koniec = new Date(new Date(t.koniec).getTime() - 1);
+    return { od: kluczCzasu(t.start), do: t.koniec ? fKlucz.format(koniec) : kluczCzasu(t.start) };
+  };
+
+  var zakres = function (t) {
+    if (!t.calodniowe) return fPelna.format(new Date(t.start)) + ', ' + fGodzina.format(new Date(t.start));
+    var r = dni(t), a = naDate(r.od), b = naDate(r.do);
+    if (r.od === r.do) return fPelna.format(a);
+    if (r.od.slice(0, 7) === r.do.slice(0, 7)) return a.getUTCDate() + '–' + fPelna.format(b);
+    return (r.od.slice(0, 4) === r.do.slice(0, 4) ? fMiesiac.format(a) : fPelna.format(a)) + ' – ' + fPelna.format(b);
+  };
+
+  var esc = function (s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+  var termin = function (t) {
+    return '<li class="termin"><span class="termin-data">' + esc(zakres(t)) + '</span>' +
+      '<span><span class="termin-tytul">' + esc(t.tytul) + '</span>' +
+      (t.miejsce ? '<span class="termin-miejsce">' + esc(t.miejsce) + '</span>' : '') + '</span></li>';
+  };
+  var pobierz = function (parametry) {
+    return fetch('/api/terminy' + (parametry ? '?' + new URLSearchParams(parametry) : ''))
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  };
+  var KANNON = '<a class="link" href="https://www.kannon.pl/" target="_top">kannon.pl</a>';
+
+  window.KacikiTerminy = {
+    dni: dni, zakres: zakres, termin: termin, esc: esc, pobierz: pobierz,
+    naDate: naDate, naKlucz: naKlucz, dodajDni: dodajDni, dzis: function () { return fKlucz.format(new Date()); },
+    KANNON: KANNON,
+  };
+
   var lista = document.querySelector('[data-terminy]');
   if (lista) {
-    var miesiac = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', timeZone: 'Europe/Warsaw' });
-    var pelna = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Warsaw' });
-    var godzina = new Intl.DateTimeFormat('pl-PL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Warsaw' });
-
-    var dzien = function (s) { var p = s.split('-'); return new Date(+p[0], p[1] - 1, +p[2], 12); };
-
-    var zakres = function (t) {
-      if (!t.calodniowe) return pelna.format(new Date(t.start)) + ', ' + godzina.format(new Date(t.start));
-      var a = dzien(t.start);
-      var b = dzien(t.koniec); b.setDate(b.getDate() - 1); // koniec w Google jest wyłączny
-      if (a.toDateString() === b.toDateString()) return pelna.format(a);
-      if (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()) return a.getDate() + '–' + pelna.format(b);
-      return (a.getFullYear() === b.getFullYear() ? miesiac.format(a) : pelna.format(a)) + ' – ' + pelna.format(b);
-    };
-
     var info = function (html) { lista.innerHTML = '<li class="terminy-info">' + html + '</li>'; };
-    var esc = function (s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
-    var kannon = '<a class="link" href="https://www.kannon.pl/" target="_top">kannon.pl</a>';
-
-    fetch('/api/terminy')
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    pobierz({ max: 5 })
       .then(function (d) {
         if (!d.terminy || !d.terminy.length) {
           info(d.skonfigurowany === false
-            ? 'Kalendarz wkrótce. Aktualne wydarzenia znajdziesz na ' + kannon + '.'
+            ? 'Kalendarz wkrótce. Aktualne wydarzenia znajdziesz na ' + KANNON + '.'
             : 'Brak zaplanowanych terminów. Zajrzyj wkrótce lub napisz do nas.');
           return;
         }
-        lista.innerHTML = d.terminy.map(function (t) {
-          return '<li class="termin"><span class="termin-data">' + esc(zakres(t)) + '</span>' +
-            '<span><span class="termin-tytul">' + esc(t.tytul) + '</span>' +
-            (t.miejsce ? '<span class="termin-miejsce">' + esc(t.miejsce) + '</span>' : '') + '</span></li>';
-        }).join('');
+        lista.innerHTML = d.terminy.map(termin).join('');
       })
-      .catch(function () { info('Nie udało się wczytać terminów. Aktualne wydarzenia znajdziesz na ' + kannon + '.'); });
+      .catch(function () { info('Nie udało się wczytać terminów. Aktualne wydarzenia znajdziesz na ' + KANNON + '.'); });
   }
 
   /* ---------- Powiększanie zdjęć z galerii ---------- */
