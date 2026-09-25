@@ -2,7 +2,7 @@
 media:
   input: src/img/uploads
   output: /img/uploads
-  extensions: [jpg, jpeg, png, webp, gif]
+  extensions: [jpg, jpeg, png, webp, gif, svg]
 
 content:
   - name: zapiski
@@ -65,6 +65,9 @@ content:
       - name: nazwa
         label: Nazwa
         type: string
+      - name: logo
+        label: Logo (kwadratowe PNG/SVG; puste = ensō)
+        type: image
       - name: haslo
         label: Hasło na górze strony
         type: string

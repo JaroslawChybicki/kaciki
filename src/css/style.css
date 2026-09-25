@@ -37,6 +37,7 @@ p { margin: 0 0 1em; }
 /* Nagłówek — widoczny tylko poza kannon.pl; w ramce jego rolę pełni strona Kannon. */
 .naglowek { border-bottom: 1px solid var(--linia); }
 .naglowek-in { display: flex; justify-content: space-between; align-items: center; gap: 1rem; height: 68px; }
+.marka img { width: auto; max-width: 160px; }
 .marka { display: flex; align-items: center; gap: .6rem; color: var(--grafit); text-decoration: none; font-size: 1.2rem; }
 .marka-kannon { font-size: .9rem; color: var(--szary); text-decoration: none; }
 .marka-kannon:hover { color: var(--bordo); }
