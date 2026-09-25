@@ -42,6 +42,9 @@ Dowolny opis wydarzenia — koszt, co zabrać, warunki uczestnictwa.
 
 „Plan dnia” kończy się pustą linią; tekst poza polami jest opisem.
 
+Załączniki dodane do wydarzenia (pliki z Google Drive) pokazują się jako „Pliki” — plik musi być
+udostępniony w Drive jako **„Każda osoba mająca link”**, inaczej odwiedzający zobaczą prośbę o dostęp.
+
 ## Osadzenie na kannon.pl (dla administratora WordPressa)
 
 Na podstronie wstaw blok **Własny HTML** z kodem:

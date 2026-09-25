@@ -281,3 +281,6 @@ p { margin: 0 0 1em; }
   .termin-rozwijany summary .termin-data { grid-column: 1 / -1; }
   .termin-szczegoly { margin-left: 0; }
 }
+.termin-pliki { list-style: none; margin: 0; padding: 0; }
+.termin-pliki li { padding: .15rem 0; }
+.termin-pliki li::before { content: "↓ "; color: var(--szary); }

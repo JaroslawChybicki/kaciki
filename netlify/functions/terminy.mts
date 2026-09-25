@@ -94,6 +94,10 @@ export default async (req: Request) => {
     tytul: e.summary ?? "",
     ...rozbierzOpis(e.description ?? ""),
     miejsce: e.location ?? "",
+    // Załączniki z Google Drive — widoczne dla odwiedzających tylko, gdy plik jest udostępniony „każdemu z linkiem”.
+    pliki: (e.attachments ?? [])
+      .filter((a: any) => /^https:\/\//.test(a.fileUrl ?? ""))
+      .map((a: any) => ({ nazwa: a.title || "Załącznik", url: a.fileUrl })),
     calodniowe: Boolean(e.start?.date),
     start: e.start?.date ?? e.start?.dateTime,
     koniec: e.end?.date ?? e.end?.dateTime,

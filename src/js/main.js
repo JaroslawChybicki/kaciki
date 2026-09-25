@@ -88,7 +88,8 @@
       (t.miejsce ? '<span class="termin-miejsce">' + esc(t.miejsce) + '</span>' : '') + '</span>';
     var id = t.id ? ' id="w-' + esc(t.id) + '"' : '';
     var plan = t.plan && t.plan.length;
-    if (!t.opis && !plan && !t.zapisy) return '<li class="termin"' + id + '>' + glowa + '</li>';
+    var pliki = t.pliki && t.pliki.length;
+    if (!t.opis && !plan && !t.zapisy && !pliki) return '<li class="termin"' + id + '>' + glowa + '</li>';
     return '<li class="termin termin-rozwijany"' + id + '><details><summary>' + glowa + '</summary>' +
       '<div class="termin-szczegoly">' +
       (t.opis ? akapity(t.opis) : '') +
@@ -96,6 +97,9 @@
         return '<dt>' + esc(p.godz) + '</dt><dd>' + esc(p.co) + '</dd>';
       }).join('') + '</dl>' : '') +
       (t.zapisy ? '<p class="termin-zapisy">' + zapisy(t.zapisy) + '</p>' : '') +
+      (pliki ? '<h4>Pliki</h4><ul class="termin-pliki">' + t.pliki.map(function (f) {
+        return '<li><a class="link" href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.nazwa) + '</a></li>';
+      }).join('') + '</ul>' : '') +
       '</div></details></li>';
   };
   // Otwiera szczegóły wydarzenia na liście i przewija do niego (w ramce — przewija stronę kannon.pl).
