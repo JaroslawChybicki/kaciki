@@ -2,15 +2,35 @@
   "nazwa": "Centrum Zen Kąciki",
   "haslo": "Po prostu siedzieć.",
   "wstep": "Centrum praktyki Buddyjskiej Wspólnoty Zen Kannon — miejsce sesshin, ciszy i wspólnej pracy wśród mazowieckich lasów.",
-  "email": "",
+  "email": "jaroslawchybicki@gmail.com",
   "adres": "ul. Cicha 5, Kąciki",
   "gmina": "gmina Osieck, powiat otwocki, województwo mazowieckie",
   "kannonUrl": "https://www.kannon.pl/",
   "rozbudowa": [
-    { "etap": "Teren i zendo", "opis": "Centrum, w którym odbywają się sesshin Sanghi Kannon.", "status": "zakończony" },
-    { "etap": "Projekt rozbudowy", "opis": "Koncepcja, projekt i formalności.", "status": "zakończony" },
-    { "etap": "Rozbudowa", "opis": "Prace budowlane — w dużej mierze wspólnymi rękami, w duchu samu.", "status": "w toku" },
-    { "etap": "Zaplecze", "opis": "Miejsca noclegowe, kuchnia, sanitariaty — więcej miejsca na odosobnienia.", "status": "planowany" },
-    { "etap": "Otwarcie nowej części", "opis": "Więcej osób na sesshin i dłuższe pobyty praktyki.", "status": "planowany" }
+    {
+      "etap": "Teren i zendo",
+      "opis": "Centrum, w którym odbywają się sesshin Sanghi Kannon.",
+      "status": "zakończony"
+    },
+    {
+      "etap": "Projekt rozbudowy",
+      "opis": "Koncepcja, projekt i formalności.",
+      "status": "zakończony"
+    },
+    {
+      "etap": "Rozbudowa",
+      "opis": "Prace budowlane — w dużej mierze wspólnymi rękami, w duchu samu.",
+      "status": "w toku"
+    },
+    {
+      "etap": "Zaplecze",
+      "opis": "Miejsca noclegowe, kuchnia, sanitariaty — więcej miejsca na odosobnienia.",
+      "status": "planowany"
+    },
+    {
+      "etap": "Otwarcie nowej części",
+      "opis": "Więcej osób na sesshin i dłuższe pobyty praktyki.",
+      "status": "planowany"
+    }
   ]
 }
