@@ -32,13 +32,13 @@ Lista odświeża się co ok. 15 minut. W wydarzeniach wpisuj tytuł i miejsce �
 Na podstronie wstaw blok **Własny HTML** z kodem:
 
 ```html
-<iframe id="kaciki-zen" src="https://kaciki-zen.netlify.app/" title="Centrum Zen Kąciki"
+<iframe id="kaciki-zen" src="https://kacikizen.netlify.app/" title="Centrum Zen Kąciki"
         style="width:100%;border:0;min-height:900px;display:block" loading="lazy"></iframe>
 <script>
 (function () {
   var f = document.getElementById('kaciki-zen'), pierwsza = true;
   window.addEventListener('message', function (e) {
-    if (e.origin !== 'https://kaciki-zen.netlify.app' || !e.data) return;
+    if (e.origin !== 'https://kacikizen.netlify.app' || !e.data) return;
     var d = e.data;
     if (d.type === 'kaciki-wysokosc') f.style.height = d.height + 'px';
     if (d.type === 'kaciki-strona') { if (!pierwsza) f.scrollIntoView(); pierwsza = false; }
@@ -54,7 +54,7 @@ Nagłówek `frame-ancestors` w `netlify.toml` pozwala osadzać stronę tylko na 
 
 ## Netlify — pierwsze podłączenie
 
-Projekt `kaciki-zen` → *Project configuration → Build & deploy → Link repository* → GitHub → `JaroslawChybicki/kaciki`,
+Projekt `kacikizen` → *Project configuration → Build & deploy → Link repository* → GitHub → `JaroslawChybicki/kaciki`,
 gałąź `claude/sweet-dirac-q87xku`. Ustawienia budowania są w `netlify.toml`.
 
 ## Praca lokalna
