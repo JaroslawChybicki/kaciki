@@ -28,7 +28,7 @@ Dopasowany do kannon.pl: font Lora, biel, grafit #333, bordo #8e1f2b (linki), cz
 - Fragmenty nauk nauczycieli w Zapiskach — tylko za ich zgodą.
 
 ## Otwarte sprawy (stan na 25.09.2026)
-- [ ] Jarek podłącza Kalendarz Google (instrukcja w README).
+- [x] Kalendarz Google podłączony (26.09): GOOGLE_CALENDAR_ID=zenkaciki@gmail.com, klucz w zmiennych Netlify (scope: functions). Zalecana rotacja klucza — był wklejony w czacie.
 - [ ] Jarek przemyśli wygląd i zawartość strony.
 - [ ] Logo — Jarek może wgrać własne (pole w Ustawieniach strony); ew. zamiana dużego ensō w hero.
 - [ ] Dokumenty: pusta zakładka gotowa (Regulaminy / Raporty z posiedzeń zarządu / Sprawozdania / Inne). Oferta: szablon raportu z posiedzenia zarządu; projekt regulaminu pobytu.
