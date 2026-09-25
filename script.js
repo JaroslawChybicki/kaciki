@@ -20,4 +20,18 @@
   }, { passive: true });
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Poza Netlify (np. GitHub Pages) formularz nie ma backendu — otwieramy gotową wiadomość e-mail.
+  var form = document.querySelector('form[name="kontakt"]');
+  var mail = document.querySelector('.contact-line a[href^="mailto:"]');
+  if (form && mail && !/netlify\.app$/.test(location.hostname)) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      var body = d.get('wiadomosc') + '\n\n— ' + d.get('imie') + ' (' + d.get('email') + ')';
+      location.href = mail.getAttribute('href') +
+        '?subject=' + encodeURIComponent('[Kąciki Zen] ' + d.get('temat')) +
+        '&body=' + encodeURIComponent(body);
+    });
+  }
 })();
