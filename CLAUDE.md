@@ -34,5 +34,5 @@ Dopasowany do kannon.pl: font Lora, biel, grafit #333, bordo #8e1f2b (linki), cz
 - [ ] Dokumenty: pusta zakładka gotowa (Regulaminy / Raporty z posiedzeń zarządu / Sprawozdania / Inne). Oferta: szablon raportu z posiedzenia zarządu; projekt regulaminu pobytu.
 - [ ] Skill „wpis z notatek” (ton Zapisków) — czeka na 2–3 teksty Jarka jako wzorzec stylu.
 - [ ] Usunąć zbędny pusty projekt Netlify `kaciki-zen` (robi to Jarek w UI).
-- [ ] E-mail ośrodka: prywatny adres usunięty (26.09); wpisać alias (np. osrodek@kannon.pl) w panelu, gdy powstanie.
+- [ ] E-mail ośrodka: na stronie osrodek@kannon.pl (26.09) — potwierdzić z Wojtkiem, że alias działa i ma 2 osoby z dostępem.
 - [ ] Przekazać adminowi kannon.pl kod osadzenia z README.
