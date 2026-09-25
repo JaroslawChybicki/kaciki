@@ -1,0 +1,39 @@
+---
+layout: base.njk
+---
+<article class="wpis">
+  <div class="wrap wrap-waski">
+    <p class="wpis-meta"><a href="/zapiski/">Zapiski z Kącików</a>{% if kategoria %} · {{ kategoria }}{% endif %} · <time datetime="{{ page.date | isoData }}">{{ page.date | dataPL }}</time></p>
+    <h1>{{ title }}</h1>
+    {% if opis %}<p class="wpis-lead">{{ opis }}</p>{% endif %}
+  </div>
+
+  {% if okladka %}
+  <figure class="wpis-okladka wrap">
+    <img src="{{ okladka | foto(1600) }}" alt="{{ title }}">
+  </figure>
+  {% endif %}
+
+  <div class="wrap wrap-waski tresc">
+    {{ content | safe }}
+  </div>
+
+  {% if galeria and galeria.length %}
+  <div class="wrap">
+    <div class="galeria">
+      {% for z in galeria %}{% if z.obraz %}
+      <figure>
+        <a href="{{ z.obraz | foto(2000) }}" data-lightbox data-podpis="{{ z.podpis }}">
+          <img src="{{ z.obraz | foto(700) }}" alt="{{ z.podpis or title }}" loading="lazy">
+        </a>
+        {% if z.podpis %}<figcaption>{{ z.podpis }}</figcaption>{% endif %}
+      </figure>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="wrap wrap-waski wpis-powrot">
+    <a class="link" href="/zapiski/">← Wszystkie zapiski</a>
+  </div>
+</article>

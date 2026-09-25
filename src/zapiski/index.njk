@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Zapiski z Kącików
+opis: Dziennik Centrum Zen Kąciki — rozbudowa, praktyka i życie wspólnoty.
+pagination:
+  data: collections.zapiski
+  size: 9
+  alias: wpisy
+permalink: "/zapiski/{% if pagination.pageNumber > 0 %}strona-{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+<section class="sekcja sekcja-pierwsza">
+  <div class="wrap">
+    <p class="etykieta">Dziennik Centrum</p>
+    <h1 class="tytul-strony">Zapiski z Kącików</h1>
+    <p class="lead">Rozbudowa, praktyka i codzienność Centrum — słowem i obrazem.</p>
+
+    {% if wpisy.length %}
+    <div class="karty">
+      {% for wpis in wpisy %}{% include "karta-wpisu.njk" %}{% endfor %}
+    </div>
+    {% else %}
+    <p class="szary">Pierwsze zapiski wkrótce.</p>
+    {% endif %}
+
+    {% if pagination.pages.length > 1 %}
+    <nav class="stronicowanie" aria-label="Kolejne strony">
+      {% if pagination.href.previous %}<a class="link" href="{{ pagination.href.previous }}">← Nowsze</a>{% endif %}
+      {% if pagination.href.next %}<a class="link" href="{{ pagination.href.next }}">Starsze →</a>{% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>

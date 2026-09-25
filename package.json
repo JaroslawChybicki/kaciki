@@ -1,0 +1,13 @@
+{
+  "name": "kaciki-zen",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@netlify/functions": "^6.0.0"
+  }
+}

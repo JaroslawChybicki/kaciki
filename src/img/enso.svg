@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Ensō">
   <path d="M150 52 C 128 28, 78 24, 50 52 C 22 80, 26 132, 60 158 C 94 184, 150 176, 168 136 C 180 108, 174 84, 160 66"
-        fill="none" stroke="#084C61" stroke-width="14" stroke-linecap="round" opacity=".92"/>
-  <circle cx="100" cy="100" r="5" fill="#db3a34"/>
+        fill="none" stroke="#333333" stroke-width="14" stroke-linecap="round" opacity=".92"/>
+  <circle cx="100" cy="100" r="5" fill="#c0392b"/>
 </svg>

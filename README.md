@@ -1,29 +1,65 @@
-# Ośrodek Zen Kąciki — strona
+# Centrum Zen Kąciki — strona
 
-Statyczna strona (HTML + CSS + odrobina JS), gotowa do wdrożenia na Netlify.
+Strona Centrum Zen w Kącikach (Sangha Kannon), osadzana w ramce na kannon.pl.
+Zbudowana w [Eleventy](https://www.11ty.dev/), hostowana na Netlify, edytowana w [Pages CMS](https://app.pagescms.org).
 
-## Struktura
+## Edycja treści (bez kodu)
 
-- `index.html` — strona główna (sekcje: Ośrodek, Praktyka, Budowa, Wsparcie, Dojazd, Kontakt)
-- `dziekujemy.html` — strona po wysłaniu formularza
-- `styles.css`, `script.js`, `assets/enso.svg`
-- `netlify.toml` — konfiguracja wdrożenia
+1. Wejdź na **https://app.pagescms.org** i zaloguj się kontem GitHub.
+2. Wybierz repozytorium `JaroslawChybicki/kaciki`.
+3. **Zapiski z Kącików** → *Add an entry*: tytuł, data, kategoria, zajawka, zdjęcie główne, galeria, treść.
+   Zaznacz *Szkic*, jeśli wpis nie jest jeszcze gotowy.
+4. **Ustawienia strony** — hasło, wstęp, adres, e-mail i etapy rozbudowy (status: zakończony / w toku / planowany).
+5. Po zapisaniu Netlify przebuduje stronę — zmiany są widoczne po 1–2 minutach.
 
-## Do uzupełnienia
+Zdjęcia: wgrywaj zwykłe JPG z telefonu/aparatu (najlepiej do ~5 MB). Netlify samo je zmniejsza i konwertuje do WebP.
 
-W `index.html` oznaczone jako `[do uzupełnienia]` / „termin wkrótce”:
+## Terminy z Kalendarza Google
 
-1. Numer konta do darowizn (sekcja *Wsparcie*).
-2. Adres e-mail kontaktowy (`mailto:` w sekcji *Kontakt*).
-3. Terminy spotkań (lista `.events` w sekcji *Praktyka*).
-4. Status etapów budowy — klasy `done` / `current` na elementach `.timeline li`.
+Sekcja „Najbliższa praktyka” pobiera wydarzenia z publicznego kalendarza Google.
 
-## Formularz
+1. W Google Calendar: utwórz kalendarz „Centrum Zen Kąciki” → *Ustawienia* → *Uprawnienia dostępu* → **Udostępnij publicznie**.
+   W *Integracja kalendarza* skopiuj **Identyfikator kalendarza**.
+2. W [Google Cloud Console](https://console.cloud.google.com/): włącz *Google Calendar API* i utwórz **klucz API**
+   (ogranicz go do *Google Calendar API*).
+3. W Netlify: *Project configuration → Environment variables* dodaj `GOOGLE_CALENDAR_ID` i `GOOGLE_API_KEY`, potem *Trigger deploy*.
 
-Formularz kontaktowy korzysta z Netlify Forms (`data-netlify="true"`) — zgłoszenia pojawią się w panelu Netlify → *Forms*. Warto tam ustawić powiadomienia e-mail.
+Klucz działa tylko po stronie serwera (funkcja `netlify/functions/terminy.mts`) — nie trafia do przeglądarki.
+Lista odświeża się co ok. 15 minut. W wydarzeniach wpisuj tytuł i miejsce — te pola są pokazywane.
 
-## Podgląd lokalny
+## Osadzenie na kannon.pl (dla administratora WordPressa)
+
+Na podstronie wstaw blok **Własny HTML** z kodem:
+
+```html
+<iframe id="kaciki-zen" src="https://kaciki-zen.netlify.app/" title="Centrum Zen Kąciki"
+        style="width:100%;border:0;min-height:900px;display:block" loading="lazy"></iframe>
+<script>
+(function () {
+  var f = document.getElementById('kaciki-zen'), pierwsza = true;
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://kaciki-zen.netlify.app' || !e.data) return;
+    var d = e.data;
+    if (d.type === 'kaciki-wysokosc') f.style.height = d.height + 'px';
+    if (d.type === 'kaciki-strona') { if (!pierwsza) f.scrollIntoView(); pierwsza = false; }
+    if (d.type === 'kaciki-przewin') window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY + d.top - 20, behavior: 'smooth' });
+  });
+})();
+</script>
+```
+
+Skrypt dopasowuje wysokość ramki do treści (bez podwójnego paska przewijania) i obsługuje przewijanie
+do sekcji oraz przejścia między podstronami. W ramce strona automatycznie ukrywa własny nagłówek i stopkę.
+Nagłówek `frame-ancestors` w `netlify.toml` pozwala osadzać stronę tylko na kannon.pl.
+
+## Netlify — pierwsze podłączenie
+
+Projekt `kaciki-zen` → *Project configuration → Build & deploy → Link repository* → GitHub → `JaroslawChybicki/kaciki`,
+gałąź `claude/sweet-dirac-q87xku`. Ustawienia budowania są w `netlify.toml`.
+
+## Praca lokalna
 
 ```
-python3 -m http.server 8000
+npm install
+npm start        # podgląd na http://localhost:8080
 ```

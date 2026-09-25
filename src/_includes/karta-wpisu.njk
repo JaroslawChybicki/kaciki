@@ -1,0 +1,10 @@
+<article class="karta">
+  <a class="karta-link" href="{{ wpis.url }}">
+    <div class="karta-foto">
+      {% if wpis.data.okladka %}<img src="{{ wpis.data.okladka | foto(700) }}" alt="" loading="lazy">{% else %}<img class="karta-enso" src="/img/enso.svg" alt="">{% endif %}
+    </div>
+    <p class="karta-meta">{% if wpis.data.kategoria %}{{ wpis.data.kategoria }} · {% endif %}{{ wpis.date | dataPL }}</p>
+    <h3>{{ wpis.data.title }}</h3>
+    {% if wpis.data.opis %}<p class="karta-opis">{{ wpis.data.opis }}</p>{% endif %}
+  </a>
+</article>

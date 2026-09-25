@@ -1,0 +1,132 @@
+---
+layout: base.njk
+---
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="etykieta">Tradycja Soto · Kąciki, gmina Osieck</p>
+      <h1>{{ strona.haslo }}</h1>
+      <p class="lead">{{ strona.wstep }}</p>
+      <p class="akcje">
+        <a class="przycisk" href="#terminy">Najbliższe terminy</a>
+        <a class="przycisk przycisk-jasny" href="/zapiski/">Zapiski z Kącików</a>
+      </p>
+    </div>
+    <img class="hero-enso" src="/img/enso.svg" alt="">
+  </div>
+</section>
+
+<section id="terminy" class="sekcja">
+  <div class="wrap dwie-kol">
+    <div>
+      <p class="etykieta">Terminy</p>
+      <h2>Najbliższa praktyka</h2>
+      <p class="szary">Sesshin, weekendy praktyki i pracy. Terminy pochodzą z kalendarza Centrum i aktualizują się automatycznie.</p>
+    </div>
+    <div>
+      <ul class="terminy" data-terminy aria-live="polite">
+        <li class="terminy-info">Wczytywanie terminów…</li>
+      </ul>
+      <p class="terminy-stopka"><a class="link" href="#kontakt">Zapytaj o udział →</a></p>
+    </div>
+  </div>
+</section>
+
+{% if collections.zapiski.length %}
+<section class="sekcja sekcja-tlo">
+  <div class="wrap">
+    <div class="sekcja-glowka">
+      <div>
+        <p class="etykieta">Zapiski z Kącików</p>
+        <h2>Z życia Centrum</h2>
+      </div>
+      <a class="link" href="/zapiski/">Wszystkie zapiski →</a>
+    </div>
+    <div class="karty">
+      {% for wpis in collections.zapiski | head(3) %}{% include "karta-wpisu.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="centrum" class="sekcja">
+  <div class="wrap dwie-kol">
+    <div>
+      <p class="etykieta">Centrum</p>
+      <h2>Miejsce praktyki Sanghi Kannon</h2>
+    </div>
+    <div class="proza">
+      <p>Centrum Zen w Kącikach jest miejscem odosobnień <strong>Buddyjskiej Wspólnoty Zen Kannon</strong> — sanghi praktykującej zen w tradycji Soto, w linii Shunryu Suzukiego Roshiego, zapoczątkowanej w Polsce przez <strong>Jakusho Kwonga Roshiego</strong>. Opatem wspólnoty jest <strong>Roshi Mikołaj Uji Markiewicz</strong>.</p>
+      <p>Odbywają się tu sesshin — kilkudniowe odosobnienia w milczeniu: zazen, kinhin, nauki Dharmy, posiłki <em>ōryōki</em> i praca (<em>samu</em>). Rozbudowa Centrum jest częścią tej samej praktyki: każdy dzień pracy to okazja, by wrócić do tego, co jest tu i teraz.</p>
+    </div>
+  </div>
+
+  <div class="wrap linia" aria-label="Linia nauczycieli">
+    <div><span class="linia-imie">Shunryu Suzuki Roshi</span><span class="linia-opis">San Francisco Zen Center</span></div>
+    <span class="linia-kreska" aria-hidden="true"></span>
+    <div><span class="linia-imie">Jakusho Kwong Roshi</span><span class="linia-opis">Sonoma Mountain Zen Center</span></div>
+    <span class="linia-kreska" aria-hidden="true"></span>
+    <div><span class="linia-imie">Roshi Mikołaj Uji Markiewicz</span><span class="linia-opis">opat Sanghi Kannon</span></div>
+    <span class="linia-kreska" aria-hidden="true"></span>
+    <div class="linia-akcent"><span class="linia-imie">Centrum Zen Kąciki</span><span class="linia-opis">gmina Osieck</span></div>
+  </div>
+</section>
+
+<section id="rozbudowa" class="sekcja sekcja-tlo">
+  <div class="wrap dwie-kol">
+    <div>
+      <p class="etykieta">Rozbudowa</p>
+      <h2>Rozbudowa Centrum</h2>
+      <p class="szary">Rozbudowa powstaje dzięki darowiznom i pracy członków sanghi oraz przyjaciół. <em>Dāna</em> — hojność — jest pierwszą z doskonałości.</p>
+      <p><a class="przycisk" href="{{ strona.kannonUrl }}" target="_top">Wesprzyj · numery kont</a></p>
+    </div>
+    <ol class="etapy">
+      {% for e in strona.rozbudowa %}
+      <li class="etap-{{ e.status | replace(' ', '-') }}">
+        <h3>{{ e.etap }}{% if e.status == "w toku" %} <span class="znacznik">w toku</span>{% endif %}</h3>
+        <p>{{ e.opis }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section id="dojazd" class="sekcja">
+  <div class="wrap dwie-kol">
+    <div>
+      <p class="etykieta">Dojazd</p>
+      <h2>Kąciki</h2>
+    </div>
+    <div class="proza">
+      <address class="adres">{{ strona.nazwa }}<br>{{ strona.adres }}<br>{{ strona.gmina }}</address>
+      <p>Przyjazd na praktykę — po wcześniejszym zgłoszeniu.</p>
+      <p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query={{ (strona.adres + ', Osieck') | urlencode }}" target="_blank" rel="noopener">Otwórz w Mapach Google →</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="sekcja sekcja-tlo">
+  <div class="wrap dwie-kol">
+    <div>
+      <p class="etykieta">Kontakt</p>
+      <h2>Napisz do nas</h2>
+      <p class="szary">Zgłoszenia na sesshin i weekendy praktyki, pytania, propozycje pomocy przy rozbudowie.</p>
+      {% if strona.email %}<p>E-mail: <a class="link" href="mailto:{{ strona.email }}">{{ strona.email }}</a></p>{% endif %}
+    </div>
+    <form class="formularz" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/dziekujemy/">
+      <input type="hidden" name="form-name" value="kontakt">
+      <p hidden><label>Nie wypełniaj: <input name="bot-field"></label></p>
+      <label>Imię i nazwisko <input type="text" name="imie" required autocomplete="name"></label>
+      <label>E-mail <input type="email" name="email" required autocomplete="email"></label>
+      <label>Temat
+        <select name="temat">
+          <option>Zgłoszenie na sesshin / praktykę</option>
+          <option>Pomoc przy rozbudowie</option>
+          <option>Pytanie</option>
+        </select>
+      </label>
+      <label>Wiadomość <textarea name="wiadomosc" rows="5" required></textarea></label>
+      <button class="przycisk" type="submit">Wyślij</button>
+    </form>
+  </div>
+</section>
