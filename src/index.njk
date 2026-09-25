@@ -72,18 +72,18 @@ layout: base.njk
   </div>
 </section>
 
-<section id="rozbudowa" class="sekcja sekcja-tlo">
+<section id="historia" class="sekcja sekcja-tlo">
   <div class="wrap dwie-kol">
     <div>
-      <p class="etykieta">Rozbudowa</p>
-      <h2>Rozbudowa Centrum</h2>
-      <p class="szary">Rozbudowa powstaje dzięki darowiznom i pracy członków sanghi oraz przyjaciół. <em>Dāna</em> — hojność — jest pierwszą z doskonałości.</p>
+      <p class="etykieta">Historia</p>
+      <h2>Historia powstawania</h2>
+      <p class="szary">Centrum powstawało i wciąż powstaje dzięki darowiznom i pracy członków sanghi oraz przyjaciół. <em>Dāna</em> — hojność — jest pierwszą z doskonałości.</p>
       <p><a class="przycisk" href="{{ strona.kannonUrl }}" target="_top">Wesprzyj · numery kont</a></p>
     </div>
     <ol class="etapy">
       {% for e in strona.rozbudowa %}
       <li class="etap-{{ e.status | replace(' ', '-') }}">
-        <h3>{{ e.etap }}{% if e.status == "w toku" %} <span class="znacznik">w toku</span>{% endif %}</h3>
+        <h3>{% if e.rok %}<span class="rok">{{ e.rok }}</span> {% endif %}{{ e.etap }}{% if e.status == "w toku" %} <span class="znacznik">w toku</span>{% endif %}</h3>
         <p>{{ e.opis }}</p>
       </li>
       {% endfor %}

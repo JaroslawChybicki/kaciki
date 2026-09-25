@@ -87,10 +87,13 @@ content:
         label: Link do strony z numerami kont
         type: string
       - name: rozbudowa
-        label: Etapy rozbudowy
+        label: Historia powstawania (etapy)
         type: object
         list: true
         fields:
+          - name: rok
+            label: Rok lub okres (np. 2019 albo 2024–2026)
+            type: string
           - name: etap
             label: Etap
             type: string

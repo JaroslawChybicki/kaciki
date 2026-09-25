@@ -164,3 +164,4 @@ p { margin: 0 0 1em; }
 .stopka a { color: var(--szary); }
 
 .tresc a[data-lightbox] img { cursor: zoom-in; width: 100%; }
+.etapy .rok { color: var(--bordo); margin-right: .35rem; }
