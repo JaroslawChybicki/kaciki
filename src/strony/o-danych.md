@@ -7,9 +7,9 @@ Szanujemy prywatność osób, które odwiedzają tę stronę i do nas piszą. Po
 
 ## Kto jest administratorem danych
 
-Administratorem danych osobowych przekazywanych przez tę stronę jest **Buddyjska Wspólnota Zen Kannon** z siedzibą w [DO UZUPEŁNIENIA: adres siedziby], wpisana do rejestru kościołów i innych związków wyznaniowych pod numerem [DO UZUPEŁNIENIA: numer wpisu]. Centrum Zen Kąciki jest częścią Wspólnoty, a nie odrębnym podmiotem.
+Administratorem danych osobowych przekazywanych przez tę stronę jest **Buddyjska Wspólnota Zen Kannon**, ul. Staffa 34 m. 18, 01-884 Warszawa, wpisana do Rejestru kościołów i innych związków wyznaniowych prowadzonego przez Ministra Spraw Wewnętrznych i Administracji pod numerem 32. Centrum Zen Kąciki jest częścią Wspólnoty, a nie odrębnym podmiotem.
 
-W sprawach dotyczących danych osobowych napisz na adres [osrodek@kannon.pl](mailto:osrodek@kannon.pl) lub listownie na adres siedziby Wspólnoty.
+W sprawach dotyczących danych osobowych napisz na adres [osrodek@kannon.pl](mailto:osrodek@kannon.pl) lub listownie na adres Wspólnoty: ul. Staffa 34 m. 18, 01-884 Warszawa.
 
 ## Jakie dane zbieramy i w jakim celu
 

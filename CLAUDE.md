@@ -8,6 +8,7 @@ Komunikacja po polsku. Szczegółowe instrukcje dla użytkownika: `README.md`.
 - Kąciki to istniejące Centrum (odbywają się tu sesshin); trwa jego rozbudowa.
 - Linia: Shunryu Suzuki Roshi → Jakusho Kwong Roshi (zapoczątkował praktykę w Polsce) → opat Sanghi Kannon: Roshi Mikołaj Uji Markiewicz.
 - Numery kont i wydarzenia są na kannon.pl — strona do nich odsyła.
+- Administrator danych: Buddyjska Wspólnota Zen Kannon, ul. Staffa 34 m. 18, 01-884 Warszawa; Rejestr kościołów i innych związków wyznaniowych (MSWiA) nr 32.
 
 ## Architektura
 - Eleventy 3 (`src/` → `_site/`), Netlify: projekt **kacikizen** → https://kacikizen.netlify.app, auto-deploy z gałęzi `claude/sweet-dirac-q87xku` (domyślna gałąź repo).
@@ -37,6 +38,6 @@ Dopasowany do kannon.pl: font Lora, biel, grafit #333, bordo #8e1f2b (linki), cz
 - [ ] Usunąć zbędny pusty projekt Netlify `kaciki-zen` (robi to Jarek w UI).
 - [ ] E-mail ośrodka: na stronie osrodek@kannon.pl (26.09) — potwierdzić z Wojtkiem, że alias działa i ma 2 osoby z dostępem.
 - [ ] Przekazać adminowi kannon.pl kod osadzenia z README.
-- [ ] /o-danych: uzupełnić 5 miejsc [DO UZUPEŁNIENIA/SPRAWDZENIA/POTWIERDZENIA] (adres i nr rejestru BWZ, operator Web3Forms, dostawca poczty, podstawa transferu Netlify, okres przechowywania — decyzja zarządu); przegląd prawny przed ogłoszeniem strony.
+- [ ] /o-danych: uzupełnić 4 miejsca [DO UZUPEŁNIENIA/SPRAWDZENIA/POTWIERDZENIA] (adres i nr rejestru BWZ — ZROBIONE 26.09; zostają: operator Web3Forms, dostawca poczty, podstawa transferu Netlify, okres przechowywania — decyzja zarządu); przegląd prawny przed ogłoszeniem strony.
 - [ ] Kalendarz: sprawdzić na prawdziwym wydarzeniu, czy Google zwraca załączniki (pole attachments) dla publicznego kalendarza; opis wydarzeń (Prowadzi/Plan dnia/Zapisy) działa — potwierdzone 26.09.
 - [ ] Czeka na decyzje Jarka: zestawienie z Projektu „Zarząd Kącików” (K1 zrobione — e-mail; K2–K9 otwarte; punkt 1: /o-danych i fonty lokalnie — ZROBIONE 26.09; zostaje zdanie o braku konsultacji). Podsumowanie Projektu NIE jest jeszcze w repo — poprosić o ponowne wklejenie w nowej sesji.
