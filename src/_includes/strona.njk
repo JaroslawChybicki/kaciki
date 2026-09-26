@@ -1,0 +1,12 @@
+---
+layout: base.njk
+---
+<article class="wpis">
+  <div class="wrap wrap-waski">
+    <h1>{{ title }}</h1>
+    {% if aktualizacja %}<p class="wpis-meta">Ostatnia aktualizacja: <time datetime="{{ aktualizacja | isoData }}">{{ aktualizacja | dataPL }}</time></p>{% endif %}
+  </div>
+  <div class="wrap wrap-waski tresc strona-stala">
+    {{ content | safe }}
+  </div>
+</article>

@@ -300,3 +300,11 @@ p { margin: 0 0 1em; }
 .akordeon summary:focus-visible { outline: 2px solid var(--bordo); outline-offset: 2px; }
 .akordeon-tresc { padding: 0 0 1.2rem; color: var(--tekst); }
 .akordeon-tresc p:last-child { margin-bottom: 0; }
+
+/* Strony stałe (np. Ochrona danych) */
+.strona-stala h2 { font-size: 1.5rem; margin-top: 2.4rem; }
+.strona-stala h3 { font-size: 1.15rem; margin-top: 1.6rem; }
+.strona-stala ul { padding-left: 1.2rem; }
+.strona-stala li { margin-bottom: .4rem; }
+.formularz-rodo { font-size: .82rem; color: var(--szary); margin: 0; }
+.stopka-in a { color: var(--szary); }

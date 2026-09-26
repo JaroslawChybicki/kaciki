@@ -147,6 +147,24 @@ content:
         label: Treść (opcjonalnie — tekst dokumentu na stronie)
         type: rich-text
 
+  - name: o-danych
+    label: Ochrona danych osobowych
+    type: file
+    path: src/strony/o-danych.md
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+      - name: opis
+        label: Opis (dla wyszukiwarek)
+        type: text
+      - name: aktualizacja
+        label: Data ostatniej aktualizacji
+        type: date
+      - name: body
+        label: Treść
+        type: rich-text
+
   - name: strona
     label: Ustawienia strony
     type: file

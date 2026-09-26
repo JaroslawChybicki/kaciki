@@ -1,9 +1,10 @@
-// Wpisy i dokumenty dodawane w panelu dostają układ i adres automatycznie,
+// Wpisy, dokumenty i strony stałe edytowane w panelu dostają układ i adres automatycznie,
 // żeby w ich folderach nie było żadnych plików technicznych.
 const RODZAJE = [
   { folder: "/aktualnosci/wpisy/", layout: "wpis.njk", url: "/aktualnosci/", sekcja: "Aktualności" },
   { folder: "/zapiski/wpisy/", layout: "wpis.njk", url: "/zapiski/", sekcja: "Zapiski z Kącików" },
   { folder: "/dokumenty/pliki/", layout: "dokument.njk", url: "/dokumenty/", sekcja: "Dokumenty" },
+  { folder: "/strony/", layout: "strona.njk", url: "/", sekcja: "" },
 ];
 const rodzaj = (d) => RODZAJE.find((r) => d.page.inputPath.includes(r.folder));
 

@@ -3,6 +3,7 @@ const dataPL = new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long",
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/css": "css", "src/js": "js", "src/img": "img" });
+  eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource/lora/files/lora-latin*-{400,500,600}-{normal,italic}.woff2": "fonts" });
 
   // Treści z panelu — bez szkiców, od najnowszego.
   const kolekcja = (nazwa, glob) =>
