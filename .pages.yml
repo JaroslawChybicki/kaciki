@@ -183,7 +183,7 @@ content:
             label: Tytuł
             type: string
           - name: tresc
-            label: Treść (pusta linia = nowy akapit; numery telefonów stają się klikalne)
+            label: "Treść (pusta linia = nowy akapit; klikalne: numery telefonów, adresy https://… oraz [opis](https://…))"
             type: text
       - name: kannonUrl
         label: Link do strony z numerami kont
