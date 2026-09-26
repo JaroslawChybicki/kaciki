@@ -130,20 +130,25 @@ layout: base.njk
       <p class="szary">Zgłoszenia na sesshin i weekendy praktyki, pytania, propozycje pomocy przy rozbudowie.</p>
       {% if strona.email %}<p>E-mail: <a class="link" href="mailto:{{ strona.email }}">{{ strona.email }}</a></p>{% endif %}
     </div>
-    <form class="formularz" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/dziekujemy/">
-      <input type="hidden" name="form-name" value="kontakt">
-      <p hidden><label>Nie wypełniaj: <input name="bot-field"></label></p>
-      <label>Imię i nazwisko <input type="text" name="imie" required autocomplete="name"></label>
+    {# Web3Forms: klucz dostępu jest publiczny z założenia (działa tylko jako „adres skrzynki” formularza). #}
+    <form class="formularz" name="kontakt" method="POST" action="https://api.web3forms.com/submit" data-formularz>
+      <input type="hidden" name="access_key" value="{{ formularz.web3formsKlucz }}">
+      <input type="hidden" name="subject" value="{{ formularz.temat }}">
+      <input type="hidden" name="from_name" value="{{ formularz.nadawca }}">
+      <input type="hidden" name="redirect" value="https://kacikizen.netlify.app/dziekujemy/">
+      <input type="checkbox" name="botcheck" class="ukryte" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label>Imię i nazwisko <input type="text" name="Imię i nazwisko" required autocomplete="name"></label>
       <label>E-mail <input type="email" name="email" required autocomplete="email"></label>
       <label>Temat
-        <select name="temat">
+        <select name="Temat">
           <option>Zgłoszenie na sesshin / praktykę</option>
           <option>Pomoc przy rozbudowie</option>
           <option>Pytanie</option>
         </select>
       </label>
-      <label>Wiadomość <textarea name="wiadomosc" rows="5" required></textarea></label>
+      <label>Wiadomość <textarea name="Wiadomość" rows="5" required></textarea></label>
       <button class="przycisk" type="submit">Wyślij</button>
+      <p class="formularz-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>

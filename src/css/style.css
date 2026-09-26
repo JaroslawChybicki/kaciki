@@ -284,3 +284,7 @@ p { margin: 0 0 1em; }
 .termin-pliki { list-style: none; margin: 0; padding: 0; }
 .termin-pliki li { padding: .15rem 0; }
 .termin-pliki li::before { content: "↓ "; color: var(--szary); }
+
+.ukryte { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formularz-status { margin: 0; font-size: .92rem; color: var(--szary); min-height: 1.4em; }
+.formularz button[disabled] { opacity: .6; cursor: wait; }

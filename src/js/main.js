@@ -30,6 +30,28 @@
     if (location.hash) window.addEventListener('load', function () { przewinDo(location.hash.slice(1)); });
   }
 
+  /* ---------- Formularz kontaktowy (Web3Forms) ---------- */
+  // Bez JS formularz wysyła się zwykłym POST-em i Web3Forms przekierowuje na /dziekujemy/.
+  // Z JS wysyłamy w tle i przechodzimy na stronę podziękowania w obrębie tej samej witryny (także w ramce kannon.pl).
+  var formularz = document.querySelector('[data-formularz]');
+  if (formularz && window.fetch) {
+    var status = formularz.querySelector('.formularz-status');
+    var wyslij = formularz.querySelector('button[type="submit"]');
+    formularz.addEventListener('submit', function (e) {
+      e.preventDefault();
+      wyslij.disabled = true;
+      status.textContent = 'Wysyłanie…';
+      fetch(formularz.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(formularz) })
+        .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.success) throw new Error(d.message); }); })
+        .then(function () { location.href = '/dziekujemy/'; })
+        .catch(function () {
+          wyslij.disabled = false;
+          status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę' +
+            (document.querySelector('a[href^="mailto:"]') ? ' albo napisz e-mailem.' : '.');
+        });
+    });
+  }
+
   /* ---------- Menu na telefonie (hamburger) ---------- */
   var menu = document.querySelector('.menu');
   var przycisk = document.querySelector('.menu-przycisk');
