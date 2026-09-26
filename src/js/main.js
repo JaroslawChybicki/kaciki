@@ -42,12 +42,16 @@
       wyslij.disabled = true;
       status.textContent = 'Wysyłanie…';
       fetch(formularz.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(formularz) })
-        .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.success) throw new Error(d.message); }); })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (d) {
+            if (!r.ok || !d.success) throw new Error(d.message || ('HTTP ' + r.status));
+          });
+        })
         .then(function () { location.href = '/dziekujemy/'; })
-        .catch(function () {
+        .catch(function (blad) {
           wyslij.disabled = false;
-          status.textContent = 'Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę' +
-            (document.querySelector('a[href^="mailto:"]') ? ' albo napisz e-mailem.' : '.');
+          status.textContent = 'Nie udało się wysłać wiadomości (' + (blad && blad.message || 'brak połączenia') + '). ' +
+            'Spróbuj ponownie za chwilę' + (document.querySelector('a[href^="mailto:"]') ? ' albo napisz e-mailem.' : '.');
         });
     });
   }

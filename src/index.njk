@@ -118,6 +118,16 @@ layout: base.njk
       <address class="adres">{{ strona.nazwa }}<br>{{ strona.adres }}<br>{{ strona.gmina }}</address>
       <p>Przyjazd na praktykę — po wcześniejszym zgłoszeniu.</p>
       <p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query={{ (strona.adres + ', Osieck') | urlencode }}" target="_blank" rel="noopener">Otwórz w Mapach Google →</a></p>
+      {% if strona.dojazd and strona.dojazd.length %}
+      <div class="akordeon">
+        {% for w in strona.dojazd %}
+        <details>
+          <summary>{{ w.tytul }}</summary>
+          <div class="akordeon-tresc">{{ w.tresc | akapity | safe }}</div>
+        </details>
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -137,7 +147,7 @@ layout: base.njk
       <input type="hidden" name="from_name" value="{{ formularz.nadawca }}">
       <input type="hidden" name="redirect" value="https://kacikizen.netlify.app/dziekujemy/">
       <input type="checkbox" name="botcheck" class="ukryte" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label>Imię i nazwisko <input type="text" name="Imię i nazwisko" required autocomplete="name"></label>
+      <label>Imię i nazwisko <input type="text" name="name" required autocomplete="name"></label>
       <label>E-mail <input type="email" name="email" required autocomplete="email"></label>
       <label>Temat
         <select name="Temat">
@@ -146,7 +156,7 @@ layout: base.njk
           <option>Pytanie</option>
         </select>
       </label>
-      <label>Wiadomość <textarea name="Wiadomość" rows="5" required></textarea></label>
+      <label>Wiadomość <textarea name="message" rows="5" required></textarea></label>
       <button class="przycisk" type="submit">Wyślij</button>
       <p class="formularz-status" role="status" aria-live="polite"></p>
     </form>

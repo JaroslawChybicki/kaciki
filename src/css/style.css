@@ -288,3 +288,15 @@ p { margin: 0 0 1em; }
 .ukryte { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .formularz-status { margin: 0; font-size: .92rem; color: var(--szary); min-height: 1.4em; }
 .formularz button[disabled] { opacity: .6; cursor: wait; }
+
+/* Akordeon (Dojazd) */
+.akordeon { margin-top: 2rem; border-top: 1px solid var(--linia); }
+.akordeon details { border-bottom: 1px solid var(--linia); }
+.akordeon summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; cursor: pointer; list-style: none; font-size: 1.1rem; color: var(--grafit); }
+.akordeon summary::-webkit-details-marker { display: none; }
+.akordeon summary::after { content: "+"; font-size: 1.3rem; color: var(--szary); }
+.akordeon details[open] summary::after { content: "−"; }
+.akordeon summary:hover { color: var(--bordo); }
+.akordeon summary:focus-visible { outline: 2px solid var(--bordo); outline-offset: 2px; }
+.akordeon-tresc { padding: 0 0 1.2rem; color: var(--tekst); }
+.akordeon-tresc p:last-child { margin-bottom: 0; }

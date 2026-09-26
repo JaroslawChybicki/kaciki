@@ -15,6 +15,14 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("dataPL", (d) => dataPL.format(new Date(d)));
   eleventyConfig.addFilter("wRodzaju", (arr, r) => (arr || []).filter((d) => d.data.kategoria === r));
+  // Zwykły tekst z panelu → akapity HTML; polskie numery telefonów (np. 503-355-458) stają się linkami tel:.
+  eleventyConfig.addFilter("akapity", (tekst) => {
+    const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return String(tekst || "").trim().split(/\n\s*\n/).map((a) =>
+      "<p>" + esc(a).replace(/\n/g, "<br>").replace(/(?<!\d)(\d{3})[ -](\d{3})[ -](\d{3})(?!\d)/g,
+        (m, a1, a2, a3) => `<a class="link" href="tel:+48${a1}${a2}${a3}">${m}</a>`) + "</p>"
+    ).join("");
+  });
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("isoData", (d) => new Date(d).toISOString().slice(0, 10));
 
